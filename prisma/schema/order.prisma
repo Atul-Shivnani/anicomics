@@ -1,0 +1,20 @@
+model Order {
+  id             String         @id @default(cuid())
+  userId         String
+  deliveryStatus String
+  paymentStatus  String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  user           User           @relation(fields: [userId], references: [id])
+  orderProducts  OrderProduct[]
+  payments       Payment[]
+}
+
+model OrderProduct {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+}

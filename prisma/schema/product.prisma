@@ -1,0 +1,46 @@
+model Product {
+  id            String          @id @default(cuid())
+  name          String
+  gender        Gender
+  color         String
+  sizes         ProductSize[]
+  images        ProductImage[]
+  variants      Product[]       @relation("VariantRelation") // One product can have multiple variants
+  parentProduct Product?        @relation("VariantRelation", fields: [parentProductId], references: [id]) // The reverse relation for parent product
+  parentProductId String?       // Nullable to allow products that are not variants
+  category      Category        @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  collection    Collection      @relation(fields: [collectionId], references: [id])
+  collectionId  String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  tags          Tag[]          @relation("ProductTags")
+  likes         Like[]
+  bags          Bag[]
+  orders        OrderProduct[] 
+  discounts     ProductDiscount[]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNI
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  imageURL  String
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model ProductSize {
+  id        String  @id @default(cuid())
+  productId String
+  size      String
+  quantity  Int
+  basePrice     Float
+  costPrice     Float
+  sellPrice     Float
+  product   Product @relation(fields: [productId], references: [id])
+}
