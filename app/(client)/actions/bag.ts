@@ -2,7 +2,7 @@
 
 import { getServerSession } from "next-auth";
 import prisma from "@/prisma/prisma";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../store/auth";
 import { Catamaran } from "next/font/google";
 
 async function getUserId() {
