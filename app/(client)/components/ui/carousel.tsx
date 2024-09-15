@@ -28,7 +28,7 @@ export default function Carousel2() {
   }, [scroll]);
 
   const images = [
-    { type: "video", src: "https://anicomics.s3.eu-north-1.amazonaws.com/public/0.mp4" },
+    { type: "video", src: "s3://anicomics/public/0.mp4https://anicomics.s3.eu-north-1.amazonaws.com/public/0.mp4" },
     { type: "img", src: "/1.png" },
     { type: "img", src: "/2.png" },
     { type: "img", src: "/3.png" },
